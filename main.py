@@ -1,3 +1,5 @@
-import cv2
-print("Hello World!")
-image=cv2.imread("image.png")
+from tkinter import *
+from tkinter import ttk
+from view.window import window
+
+window.mainloop()
