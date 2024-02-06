@@ -1,5 +1,4 @@
-from tkinter import *
-from tkinter import ttk
 from view.window import window
+from view.menu_defs import *
 
 window.mainloop()
