@@ -10,6 +10,8 @@ window.resizable(False, False)
 window.option_add("*tearOff", FALSE)
 #/
 
+def openGit():
+    webbrowser.open("https://github.com/GriZimin/ComputerVision")
 # Объявление меню
 main_menu = Menu()
 file_menu = Menu()
@@ -19,7 +21,7 @@ file_menu.add_separator()
 file_menu.add_cascade(label="Выйти")
 
 info_menu = Menu()
-info_menu.add_cascade(label="GitHub", commamd=openGit())
+info_menu.add_cascade(label="GitHub", command=openGit)
 info_menu.add_cascade(label="Документация")
 
 main_menu.add_cascade(label="Файл", menu=file_menu)
