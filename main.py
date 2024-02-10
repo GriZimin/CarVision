@@ -26,3 +26,5 @@ main_menu.add_cascade(label="Справка", menu=info_menu)
 window.config(menu=main_menu)
 
 window.mainloop()
+
+#егор молодец
