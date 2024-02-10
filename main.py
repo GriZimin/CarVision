@@ -38,3 +38,4 @@ img = tk.PhotoImage(file="/home/grizimin/Pictures/islands-retina-50.png")
 tk.Label(frame1, image=img).pack(fill=tk.BOTH)
 
 window.mainloop()
+
