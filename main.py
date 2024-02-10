@@ -27,4 +27,3 @@ window.config(menu=main_menu)
 
 window.mainloop()
 
-#егор молодец
