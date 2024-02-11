@@ -34,8 +34,8 @@ frame1.pack(fill=tk.Y, side=tk.LEFT)
 frame2 = tk.Frame(master=window, width=300)
 frame2.pack(fill=tk.Y, side=tk.LEFT)
 
-img = tk.PhotoImage(file="/home/grizimin/Pictures/islands-retina-50.png")
-tk.Label(frame1, image=img).pack(fill=tk.BOTH)
+#img = tk.PhotoImage(file="/home/grizimin/Pictures/islands-retina-50.png")
+#tk.Label(frame1, image=img).pack(fill=tk.BOTH)
 
 window.mainloop()
 
