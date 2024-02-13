@@ -44,6 +44,9 @@ image_tk = ImageTk.PhotoImage(image)
 label = ttk.Label(frame1, image=image_tk)
 label.pack()
 
+label1 = ttk.Label(master=frame2, text="Distance: 36 \nObject: 0")
+label1.pack()
+
 #button = tk.Button(frame1, image=image_tk)
 #button.pack()
 
