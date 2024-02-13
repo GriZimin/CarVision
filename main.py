@@ -1,6 +1,9 @@
 import tkinter as tk
 import view.view_defs as defs
 from tkinter import messagebox
+from tkinter import ttk
+import customtkinter as ctk
+from PIL import ImageTk, Image
 
 # Инициализаия окна
 window = tk.Tk()
@@ -29,13 +32,20 @@ main_menu.add_cascade(label="Справка", menu=info_menu)
 window.config(menu=main_menu)
 #/
 
+#1200x900 ....
 frame1 = tk.Frame(master=window, width=900)
 frame1.pack(fill=tk.Y, side=tk.LEFT)
 frame2 = tk.Frame(master=window, width=300)
 frame2.pack(fill=tk.Y, side=tk.LEFT)
 
-#img = tk.PhotoImage(file="/home/grizimin/Pictures/islands-retina-50.png")
-#tk.Label(frame1, image=img).pack(fill=tk.BOTH)
+image = Image.open('dataset.jpg').resize((900, 506))
+image_tk = ImageTk.PhotoImage(image)
+
+label = ttk.Label(frame1, image=image_tk)
+label.pack()
+
+#button = tk.Button(frame1, image=image_tk)
+#button.pack()
 
 window.mainloop()
 
