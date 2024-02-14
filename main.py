@@ -11,7 +11,7 @@ window.geometry("1200x506")
 window.title("CarVision")
 window.resizable(False, False)
 window.option_add("*tearOff", False)
-window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="favicon.png"))
+window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="images/favicon.png"))
 #/
 
 # Объявление меню
@@ -38,7 +38,7 @@ frame1.pack(fill=tk.Y, side=tk.LEFT)
 frame2 = tk.Frame(master=window, width=300)
 frame2.pack(fill=tk.Y, side=tk.LEFT)
 
-image = Image.open('dataset.jpg').resize((900, 506))
+image = Image.open('II_image/finishImage.jpg').resize((900, 506))
 image_tk = ImageTk.PhotoImage(image)
 
 label = ttk.Label(frame1, image=image_tk)
@@ -49,6 +49,10 @@ label1.pack()
 
 #button = tk.Button(frame1, image=image_tk)
 #button.pack()
+
+
+
+
 
 window.mainloop()
 

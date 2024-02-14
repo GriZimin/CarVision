@@ -7,3 +7,5 @@ def openGitHub():
 
 def openDocumentation():
     webbrowser.open("grizimin.github.io/ComputerVision/")
+
+
