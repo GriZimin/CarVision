@@ -7,7 +7,7 @@ from PIL import ImageTk, Image
 
 # Инициализаия окна
 window = tk.Tk()
-window.geometry("1200x700")
+window.geometry("1200x506")
 window.title("CarVision")
 window.resizable(False, False)
 window.option_add("*tearOff", False)
