@@ -19,7 +19,8 @@ window.iconphoto(True, icopath)
 window.option_add("*tearOff", False)
 window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="images/favicon.png"))
 
-"""main_menu = tk.Menu(window)
+"""
+main_menu = tk.Menu(window)
 file_menu = tk.Menu()
 file_menu.add_command(label="Импорт", command=defs.check)
 file_menu.add_command(label="Экспорт")
@@ -33,9 +34,8 @@ info_menu.add_command(label="Документация", command=defs.openDocumen
 main_menu.add_cascade(label="Файл", menu=file_menu)
 main_menu.add_cascade(label="Справка", menu=info_menu)
 
-window.config(menu=main_menu)"""
-
-
+window.config(menu=main_menu)
+"""
 
 frame_1 = ctk.CTkFrame(master=window, width=540,height=540)
 frame_1.grid(row=0, column=0, padx=10, pady=(10, 10), sticky="nsw")

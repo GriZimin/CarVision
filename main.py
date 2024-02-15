@@ -5,54 +5,46 @@ from tkinter import ttk
 import customtkinter as ctk
 from PIL import ImageTk, Image
 
+ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
+ctk.set_default_color_theme("blue")
+
 # Инициализаия окна
-window = tk.Tk()
-window.geometry("1200x506")
+window = ctk.CTk()
+window.geometry("960x506")
 window.title("CarVision")
 window.resizable(False, False)
 window.option_add("*tearOff", False)
 window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="images/favicon.png"))
 #/
 
-# Объявление меню
-main_menu = tk.Menu(window)
-file_menu = tk.Menu()
-file_menu.add_command(label="Импорт", command=defs.check)
-file_menu.add_command(label="Экспорт")
-file_menu.add_separator()
-file_menu.add_command(label="Выйти", command=exit)
+# Инициализация меню
+menu_frame = ctk.CTkFrame(master=window)
+menu_frame.grid(row=0, pady=10, padx=0, sticky="w")
 
-info_menu = tk.Menu()
-info_menu.add_command(label="GitHub", command=defs.openGitHub)
-info_menu.add_command(label="Документация", command=defs.openDocumentation)
+file_menu = ctk.CTkOptionMenu(menu_frame, values=["Импорт", "Экспорт", "Выйти"], command=defs.FileMenuHandler)
+file_menu.grid(row=0, column=0, pady=10, padx=10)
+file_menu.set("Файл")
 
-main_menu.add_cascade(label="Файл", menu=file_menu)
-main_menu.add_cascade(label="Справка", menu=info_menu)
-
-window.config(menu=main_menu)
+help_menu = ctk.CTkOptionMenu(menu_frame, values=["Документация", "GitHub"], command=defs.HelpMenuHandler)
+help_menu.grid(row=0, column=1, pady=10, padx=10)
+help_menu.set("Справка")
 #/
 
-#1200x900 ....
-frame1 = tk.Frame(master=window, width=900)
-frame1.pack(fill=tk.Y, side=tk.LEFT)
-frame2 = tk.Frame(master=window, width=300)
-frame2.pack(fill=tk.Y, side=tk.LEFT)
+# Инициализация картинки
+image_frame = ctk.CTkFrame(master=window)
+image_frame.grid(row=1, pady=10, padx=0)
 
-image = Image.open('II_image/finishImage.jpg').resize((900, 506))
+image = Image.open('II_image/finishImage.jpg').resize((711, 400))
 image_tk = ImageTk.PhotoImage(image)
+label = ttk.Label(image_frame, image=image_tk)
+label.grid(row=2, column=0, padx=10, pady=10, sticky="nsw")
+#/
 
-label = ttk.Label(frame1, image=image_tk)
-label.pack()
-
-label1 = ttk.Label(master=frame2, text="Distance: 36 \nObject: 0")
-label1.pack()
-
-#button = tk.Button(frame1, image=image_tk)
-#button.pack()
-
-
-
-
+# Инициализация текстового поля
+text_box = ctk.CTkTextbox(master=window)
+text_box.insert("0.0", "Distance: 0 \n\nObject: 0")
+text_box.configure(width=200, height=400)
+text_box.grid(row=1, column=1, padx=10, pady=10)
 
 window.mainloop()
 
