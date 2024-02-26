@@ -1,0 +1,12 @@
+names:
+- ped
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: citypersons-woqjq
+  url: https://universe.roboflow.com/citypersons-conversion/citypersons-woqjq/dataset/11
+  version: 11
+  workspace: citypersons-conversion
+test: ../test/images
+train: Citypersons-11/train/images
+val: Citypersons-11/valid/images
