@@ -52,3 +52,4 @@ text_box.grid(row=1, column=1, padx=0, pady=10)
 if __name__ == "__main__":
     window.mainloop()
 
+#непон
