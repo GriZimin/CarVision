@@ -1,9 +1,33 @@
 import tkinter as tk
+
+import model.main
 import view.view_defs as defs
 from tkinter import messagebox
 from tkinter import ttk
+from tkinter import filedialog
 import customtkinter as ctk
 from PIL import ImageTk, Image
+import cv2
+
+def FileMenuHandler(choice, label):
+    if (choice == "Импорт"):
+        pass
+    if (choice == "Экспорт"):
+        pass
+    if (choice == "Открыть Файл"):
+        filepath = filedialog.askopenfilename()
+        if (filepath != ""):
+            image = cv2.imread(filepath)
+            image = model.main.detect(image)
+            im = Image.fromarray(image)
+            imagetk = ImageTk.PhotoImage(image=im)
+            #imagetk = ImageTk.PhotoImage(image)
+            label.configure(image=imagetk)
+
+            label.image = imagetk
+
+    if (choice == "Выйти"):
+        exit(-1)
 
 ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")
@@ -20,11 +44,21 @@ window.iconphoto(True, icopath)
 window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="images/favicon.png"))
 #/
 
+# Инициализация окна
+image_frame = ctk.CTkFrame(master=window)
+image_frame.grid(row=1, pady=10, padx=10)
+
+image = Image.open('model/runs/detect/predict6/valpic.jpg').resize((711, 430))
+image_tk = ImageTk.PhotoImage(image)
+label = ttk.Label(image_frame, image=image_tk)
+label.grid(row=2, column=0, padx=10, pady=10, sticky="nsw")
+#/
+
 # Инициализация меню
 menu_frame = ctk.CTkFrame(master=window)
 menu_frame.grid(row=0, pady=10, padx=10, sticky="w")
 
-file_menu = ctk.CTkOptionMenu(menu_frame, values=["Импорт", "Экспорт", "Выйти"], command=defs.FileMenuHandler)
+file_menu = ctk.CTkOptionMenu(menu_frame, values=["Импорт", "Экспорт", "Открыть Файл", "Выйти"], command=lambda choice: FileMenuHandler(choice, label))
 file_menu.grid(row=0, column=0, pady=10, padx=10)
 file_menu.set("Файл")
 
@@ -33,15 +67,6 @@ help_menu.grid(row=0, column=1, pady=10, padx=10)
 help_menu.set("Справка")
 #/
 
-# Инициализация картинки
-image_frame = ctk.CTkFrame(master=window)
-image_frame.grid(row=1, pady=10, padx=10)
-
-image = Image.open('II_image/finishImage.jpg').resize((711, 430))
-image_tk = ImageTk.PhotoImage(image)
-label = ttk.Label(image_frame, image=image_tk)
-label.grid(row=2, column=0, padx=10, pady=10, sticky="nsw")
-#/
 
 # Инициализация текстового поля
 text_box = ctk.CTkTextbox(master=window)
