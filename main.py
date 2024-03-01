@@ -4,7 +4,6 @@ import model.main
 import view.view_defs as defs
 from tkinter import messagebox
 from tkinter import ttk
-from tkinter import filedialog
 import customtkinter as ctk
 from PIL import ImageTk, Image
 import cv2
@@ -15,15 +14,15 @@ def FileMenuHandler(choice, label):
     if (choice == "Экспорт"):
         pass
     if (choice == "Открыть Файл"):
-        filepath = filedialog.askopenfilename()
+        filepath = ctk.filedialog.askopenfilename()
         if (filepath != ""):
             image = cv2.imread(filepath)
             image = model.main.detect(image)
-            im = Image.fromarray(image)
+            color_coverted = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            im = Image.fromarray(color_coverted)
             imagetk = ImageTk.PhotoImage(image=im)
             #imagetk = ImageTk.PhotoImage(image)
             label.configure(image=imagetk)
-
             label.image = imagetk
 
     if (choice == "Выйти"):
