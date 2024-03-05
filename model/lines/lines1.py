@@ -30,8 +30,8 @@ while video.isOpened():
     frameF = cv2.resize(image, dim)
     copy_img = cv2.resize(copy_img, dim)
 
-    copy_img = detect.cenny(copy_img)
     copy_img = detect.mask(copy_img)
+    copy_img = detect.cenny(copy_img)
 
     lines = cv2.HoughLinesP(copy_img, 2, np.pi / 180, 100, np.array([()]), 40, 2)
     a_lines = detect.average_slope_intercept(copy_img, lines)
