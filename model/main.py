@@ -1,11 +1,12 @@
 from ultralytics import YOLO
 from PIL import Image
 import cv2
+
 from roboflow import Roboflow
 
 # Тренировка
-#model = YOLO("yolov8n.yaml")  # build a new model from scratch
-#model.train(data="config.yaml", epochs=200, batch=2)
+"""model = YOLO("yolov8n.yaml")  # build a new model from scratch
+model.train(data="config.yaml", epochs=1)"""
 
 # Загрузка датасета
 #from roboflow import Roboflow
@@ -27,12 +28,16 @@ from roboflow import Roboflow
 #cv2.waitKey(0)
 
 def detect(image):
-    model = YOLO('model/runs/detect/train12/weights/best.pt')
+    model = YOLO('E:\\CarVision\\model\\runs\\detect\\train12\\weights\\best.pt')
     results = model.predict(image)
+
     for result in results:
         boxes = result.boxes.cpu().numpy()
         xyxys = boxes.xyxy
+        confs = boxes.conf
+        print(confs)
         for xyxy in xyxys:
-            cv2.rectangle(image, (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3])), (0, 255, 0), thickness=8)
+            cv2.rectangle(image, (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3])), (0, 255, 0), thickness=3)
     image = cv2.resize(image, (711, 430), interpolation=cv2.INTER_LINEAR)
+    print("000111000")
     return image
