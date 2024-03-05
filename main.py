@@ -8,26 +8,6 @@ import customtkinter as ctk
 from PIL import ImageTk, Image
 import cv2
 
-def FileMenuHandler(choice, label):
-    if (choice == "Импорт"):
-        pass
-    if (choice == "Экспорт"):
-        pass
-    if (choice == "Открыть Файл"):
-        filepath = ctk.filedialog.askopenfilename()
-        if (filepath != ""):
-            image = cv2.imread(filepath)
-            image = model.main.detect(image)
-            color_coverted = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            im = Image.fromarray(color_coverted)
-            imagetk = ImageTk.PhotoImage(image=im)
-            #imagetk = ImageTk.PhotoImage(image)
-            label.configure(image=imagetk)
-            label.image = imagetk
-
-    if (choice == "Выйти"):
-        exit(-1)
-
 ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")
 
