@@ -57,7 +57,7 @@ label.grid(row=2, column=0, padx=10, pady=10, sticky="nsw")
 menu_frame = ctk.CTkFrame(master=window)
 menu_frame.grid(row=0, pady=10, padx=10, sticky="w")
 
-file_menu = ctk.CTkOptionMenu(menu_frame, values=["Импорт", "Экспорт", "Открыть Файл", "Выйти"], command=lambda choice: FileMenuHandler(choice, label))
+file_menu = ctk.CTkOptionMenu(menu_frame, values=["Импорт", "Экспорт", "Открыть Файл", "Выйти"], command=lambda choice: defs.FileMenuHandler(choice, label))
 file_menu.grid(row=0, column=0, pady=10, padx=10)
 file_menu.set("Файл")
 

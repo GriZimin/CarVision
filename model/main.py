@@ -27,17 +27,16 @@ model.train(data="config.yaml", epochs=1)"""
 #cv2.imshow('Image', img)
 #cv2.waitKey(0)
 
+names = ['barricade', 'crossing', 'person']
 def detect(image):
-    model = YOLO('E:\\CarVision\\model\\runs\\detect\\train12\\weights\\best.pt')
+    model = YOLO('model/runs/detect/train12/weights/best.pt')
     results = model.predict(image)
-
     for result in results:
         boxes = result.boxes.cpu().numpy()
         xyxys = boxes.xyxy
-        confs = boxes.conf
-        print(confs)
-        for xyxy in xyxys:
-            cv2.rectangle(image, (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3])), (0, 255, 0), thickness=3)
+        print(boxes.cls)
+        for i in range(len(xyxys)):
+            cv2.rectangle(image, (int(xyxys[i][0]), int(xyxys[i][1])), (int(xyxys[i][2]), int(xyxys[i][3])), (0, 255, 0), thickness=3)
+            cv2.putText(image, names[int(boxes.cls[i])], (int(xyxys[i][0]), int(xyxys[i][1])), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), thickness=3, lineType=2)
     image = cv2.resize(image, (711, 430), interpolation=cv2.INTER_LINEAR)
-    print("000111000")
     return image

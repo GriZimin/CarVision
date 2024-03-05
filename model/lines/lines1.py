@@ -1,10 +1,7 @@
 import numpy as np
 import cv2
 import model.main
-from PIL import ImageTk, Image
 import detect
-import math
-import operator
 
 video = cv2.VideoCapture("win-20221219-16-35-22-pro_MvA292jB.mp4")
 
