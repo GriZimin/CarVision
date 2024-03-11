@@ -42,8 +42,8 @@ def FileMenuHandler(choice, label):
                             cv2.FONT_HERSHEY_SIMPLEX, 1, colors[int(cls[i])], thickness=2, lineType=3)
 
             x1, y1, x2, y2 = middle_line_picture(image)
-            print(x1,y1,x2,y2)
-            cv2.line(final_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 7)
+            #print(x1,y1,x2,y2)
+            cv2.line(final_image, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 255), 5)
 
             # Конвертация и загрузка изображения
             final_image = cv2.resize(final_image, (711, 430), interpolation=cv2.INTER_LINEAR)

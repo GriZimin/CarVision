@@ -8,8 +8,8 @@ def middle_line_picture(picture):
     image = picture
     copy_img = np.copy(image)
 
-    #cv2.namedWindow("picture", cv2.WINDOW_AUTOSIZE)
-    #cv2.resizeWindow('picture', 960, 540)
+    # cv2.namedWindow("picture", cv2.WINDOW_AUTOSIZE)
+    # cv2.resizeWindow('picture', 960, 540)
 
     # image = model.main.detect(picture)
     # color_coverted = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -25,17 +25,17 @@ def middle_line_picture(picture):
 
     lines = cv2.HoughLinesP(copy_img, 2, np.pi / 180, 100, np.array([()]), 40, 2)
     a_lines = detect.average_slope_intercept(copy_img, lines)
-    line_img = detect.display_lines(frameF, a_lines)
+    # line_img = detect.display_lines(frameF, a_lines)
     # final_frame = cv2.addWeighted(frameF, 0.8, line_img, 0.5, 1)
-
+    #
     x1 = (a_lines[0][0] + a_lines[1][0]) / 2
     x2 = (a_lines[0][2] + a_lines[1][2]) / 2
     y1 = (a_lines[0][1] + a_lines[1][1]) / 2
     y2 = (a_lines[0][3] + a_lines[1][3]) / 2
+    #
+    # cr_line = cv2.line(final_frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 0), 2)
 
-    #cr_line = cv2.line(final_frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 0), 2)
-
-    # cv2.imshow('picture', final_frame)
+    # cv2.imshow('picture', copy_img)
     #
     # cv2.waitKey(0)
 

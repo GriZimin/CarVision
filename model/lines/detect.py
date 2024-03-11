@@ -47,7 +47,7 @@ def display_lines(image, lines):
 
 def mask(image):
     height = image.shape[0]
-    polygons = np.array([(0,height//1.7),(960,height//1.7),(960,960),(0,960)])
+    polygons = np.array([(960,height//1.7),(0,height//1.7),(0,540),(960,540)])
     mask = np.zeros_like(image)
     cv2.fillPoly(mask, np.array([polygons], dtype=np.int64), 1024)
     masked_image = cv2.bitwise_and(image, mask)
