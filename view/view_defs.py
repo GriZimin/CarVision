@@ -8,8 +8,10 @@ from model.main import detect
 import customtkinter as ctk
 from PIL import ImageTk, Image
 import keyboard
-
-eeg1=0
+import os.path
+from tkinter import ttk
+import os
+import subprocess
 
 def check():
     print("Hello World")
@@ -65,7 +67,5 @@ def HelpMenuHandler(choice):
         openGitHub()
 
 def eeg(event):
-
-    global eeg1
-    eeg1=1
-    print(0)
+    # не видит блядский короткий ебанный уёбишьный путь
+    os.system("python E:\\CarVision\\view\\egg.py")
