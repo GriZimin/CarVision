@@ -7,7 +7,9 @@ import model.lines.lines1
 from model.main import detect
 import customtkinter as ctk
 from PIL import ImageTk, Image
+import keyboard
 
+eeg1=0
 
 def check():
     print("Hello World")
@@ -62,4 +64,8 @@ def HelpMenuHandler(choice):
     if (choice == "GitHub"):
         openGitHub()
 
+def eeg(event):
 
+    global eeg1
+    eeg1=1
+    print(0)
