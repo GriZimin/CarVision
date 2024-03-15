@@ -54,10 +54,8 @@ text_box.insert("0.0", "Distance: 0 \n\nObject: 0")
 text_box.configure(state="disabled", width=200, height=455, text_color="DarkCyan", border_width=5, font=("1", 15))
 text_box.grid(row=1, column=1, padx=0, pady=10)
 
-#христос воскрес Alt-F4
+#secret way
 window.bind("<Control-Alt-Shift-F12>", defs.eeg)
 
 if __name__ == "__main__":
     window.mainloop()
-
-#непон

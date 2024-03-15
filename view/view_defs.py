@@ -68,4 +68,5 @@ def HelpMenuHandler(choice):
 
 def eeg(event):
     # не видит блядский короткий ебанный уёбишьный путь
-    os.system("python E:\\CarVision\\view\\egg.py")
+    print("Hello World")
+    os.system("python view/egg.py")
