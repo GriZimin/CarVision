@@ -67,6 +67,4 @@ def HelpMenuHandler(choice):
         openGitHub()
 
 def eeg(event):
-    # не видит блядский короткий ебанный уёбишьный путь
-    print("Hello World")
     os.system("python view/egg.py")

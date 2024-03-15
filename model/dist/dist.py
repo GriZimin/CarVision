@@ -84,4 +84,10 @@ h, w = image.shape[:2]
 ret, matrix, distortion, r_vecs, t_vecs = cv2.calibrateCamera(
 	threedpoints, twodpoints, grayColor.shape[::-1], None, None)
 
-m = ((int(matrix[0][0]) + int(matrix[1][1])) / 2)  
+m = ((int(matrix[0][0]) + int(matrix[1][1])) / 2)
+
+distance = (m * 260 * 1080)/( *1000)
+                          # ----------------------------------------------------------------
+                          #       object height (pixels) * sensor height (mm)
+
+print(distance)

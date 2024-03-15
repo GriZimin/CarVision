@@ -20,6 +20,7 @@ frames=openImage.n_frames
 imageObject = [tk.PhotoImage(file=gifImage, format=f"gif -index {i}") for i in range(frames)]
 count=0
 showAnimation = None
+
 def animation(count):
     global showAnimation
     newImage=imageObject[count]
