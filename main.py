@@ -59,13 +59,18 @@ def FileMenuHandler(choice):
             final_image = image
             final_image = cv2.resize(final_image, (960, 540), interpolation=cv2.INTER_LINEAR)
             image = cv2.resize(image, (960, 540), interpolation=cv2.INTER_LINEAR)
-
             xyxys, cls = detect(image)
+            print_log("Detection Results:")
+            results = dict()
             for i in range(len(xyxys)):
                 cv2.rectangle(final_image, (int(xyxys[i][0]), int(xyxys[i][1])), (int(xyxys[i][2]), int(xyxys[i][3])),
                               colors[int(cls[i])], thickness=2)
                 cv2.putText(final_image, names[int(cls[i])], (int(xyxys[i][0]), int(xyxys[i][1])),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, colors[int(cls[i])], thickness=2, lineType=3)
+                if results.get(names[int(cls[i])], 0) == 0: results[names[int(cls[i])]] = 1
+                else: results[names[int(cls[i])]]+=1
+            for name, count in results.items():
+                print_log(f'{count} instances of "{name}"')
 
             x1, y1, x2, y2 = middle_line_picture(image)
             #print(x1,y1,x2,y2)
@@ -79,6 +84,7 @@ def FileMenuHandler(choice):
             #imagetk = ImageTk.PhotoImage(image)
             label.configure(image=imagetk)
             label.image = imagetk
+            print_log("Detection Complete")
 
     if (choice == "Выйти"):
         exit(-1)
