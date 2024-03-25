@@ -9,6 +9,8 @@ from tkinter import *
 import customtkinter as ctk
 from PIL import ImageTk, Image
 import cv2
+from zipfile import ZipFile
+import os
 
 ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")
@@ -47,11 +49,25 @@ def print_log(text):
 
 names = ['barricade', 'crossing', 'person']
 colors = [(0,0,255), (0,255,0), (255,255,0)]
+opencv_current_image = cv2.imread("model/runs/detect/predict6/valpic.jpg")
 def FileMenuHandler(choice):
+    global opencv_current_image
     if (choice == "Импорт"):
         pass
     if (choice == "Экспорт"):
-        print_log("Hello World")
+        filepath = ctk.filedialog.asksaveasfilename(defaultextension=".carvis")
+        print(filepath)
+        archive = ZipFile(filepath[::-6] + "zip", "w")
+        cv2.imwrite("image.png", img=opencv_current_image)
+        text = open("text.txt", "a+")
+        text.write("Hello World")
+        text.close()
+        archive.write("text.txt")
+        archive.write("image.png")
+        archive.close()
+        os.remove("text.txt")
+        os.remove("image.png")
+        os.rename(filepath[::-6] + "zip", filepath)
     if (choice == "Открыть Файл"):
         filepath = ctk.filedialog.askopenfilename()
         if (filepath != ""):
@@ -84,6 +100,7 @@ def FileMenuHandler(choice):
             #imagetk = ImageTk.PhotoImage(image)
             label.configure(image=imagetk)
             label.image = imagetk
+            opencv_current_image = color_coverted
             print_log("Detection Complete")
 
     if (choice == "Выйти"):
