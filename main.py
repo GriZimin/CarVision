@@ -53,11 +53,25 @@ opencv_current_image = cv2.imread("model/runs/detect/predict6/valpic.jpg")
 def FileMenuHandler(choice):
     global opencv_current_image
     if (choice == "Импорт"):
-        pass
+        filepath = ctk.filedialog.askopenfilename()
+        with ZipFile(filepath, "r") as archive:
+            archive.extractall(members=["image.png"])
+            image = cv2.imread("image.png")
+            os.remove("image.png")
+            # bla bla bla bla
+            image = cv2.resize(image, (711, 430), interpolation=cv2.INTER_LINEAR)
+            color_coverted = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            im = Image.fromarray(color_coverted)
+            imagetk = ImageTk.PhotoImage(image=im)
+            # imagetk = ImageTk.PhotoImage(image)
+            label.configure(image=imagetk)
+            label.image = imagetk
+            opencv_current_image = image
+            print_log("Import Successful")
     if (choice == "Экспорт"):
         filepath = ctk.filedialog.asksaveasfilename(defaultextension=".carvis")
         print(filepath)
-        archive = ZipFile(filepath[::-6] + "zip", "w")
+        archive = ZipFile(filepath[:-6] + "zip", "w")
         cv2.imwrite("image.png", img=opencv_current_image)
         text = open("text.txt", "a+")
         text.write("Hello World")
@@ -67,7 +81,8 @@ def FileMenuHandler(choice):
         archive.close()
         os.remove("text.txt")
         os.remove("image.png")
-        os.rename(filepath[::-6] + "zip", filepath)
+        os.rename(filepath[:-6] + "zip", filepath)
+        print_log("Export Successful")
     if (choice == "Открыть Файл"):
         filepath = ctk.filedialog.askopenfilename()
         if (filepath != ""):
@@ -100,7 +115,7 @@ def FileMenuHandler(choice):
             #imagetk = ImageTk.PhotoImage(image)
             label.configure(image=imagetk)
             label.image = imagetk
-            opencv_current_image = color_coverted
+            opencv_current_image = final_image
             print_log("Detection Complete")
 
     if (choice == "Выйти"):
