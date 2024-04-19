@@ -11,6 +11,7 @@ from PIL import ImageTk, Image
 import cv2
 from zipfile import ZipFile
 import os
+import pickle
 
 ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")
@@ -46,40 +47,64 @@ def print_log(text):
     text_box.configure(state=tk.NORMAL)
     text_box.insert('end', f"{text}\n")
     text_box.configure(state=tk.DISABLED)
-
+ann = []
 names = ['barricade', 'crossing', 'person']
 colors = [(0,0,255), (0,255,0), (255,255,0)]
 opencv_current_image = cv2.imread("model/runs/detect/predict6/valpic.jpg")
+opencv_base_image = opencv_current_image
 def FileMenuHandler(choice):
     global opencv_current_image
+    global opencv_base_image
+    global ann
     if (choice == "Импорт"):
         filepath = ctk.filedialog.askopenfilename()
         with ZipFile(filepath, "r") as archive:
             archive.extractall(members=["image.png"])
             image = cv2.imread("image.png")
             os.remove("image.png")
-            # bla bla bla bla
-            image = cv2.resize(image, (711, 430), interpolation=cv2.INTER_LINEAR)
-            color_coverted = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            archive.extractall(members=["annotations.p"])
+            annFile = open('annotations.p', 'rb')
+            ann = pickle.load(annFile)
+            xyxys = ann[0]
+            cls = ann[1]
+            
+            final_image = cv2.resize(image, (960, 540), interpolation=cv2.INTER_LINEAR)
+
+            print_log("Import Results:")
+            results = dict()
+            for i in range(len(xyxys)):
+                cv2.rectangle(final_image, (int(xyxys[i][0]), int(xyxys[i][1])), (int(xyxys[i][2]), int(xyxys[i][3])),
+                              colors[int(cls[i])], thickness=2)
+                cv2.putText(final_image, names[int(cls[i])], (int(xyxys[i][0]), int(xyxys[i][1])),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, colors[int(cls[i])], thickness=2, lineType=3)
+                if results.get(names[int(cls[i])], 0) == 0: results[names[int(cls[i])]] = 1
+                else: results[names[int(cls[i])]]+=1
+            for name, count in results.items():
+                print_log(f'{count} instances of "{name}"')
+
+            
+            final_image = cv2.resize(final_image, (711, 430), interpolation=cv2.INTER_LINEAR)
+            color_coverted = cv2.cvtColor(final_image, cv2.COLOR_BGR2RGB)
             im = Image.fromarray(color_coverted)
             imagetk = ImageTk.PhotoImage(image=im)
             # imagetk = ImageTk.PhotoImage(image)
             label.configure(image=imagetk)
             label.image = imagetk
-            opencv_current_image = image
+            opencv_current_image = final_image
+            opencv_base_image = image
             print_log("Import Successful")
     if (choice == "Экспорт"):
         filepath = ctk.filedialog.asksaveasfilename(defaultextension=".carvis")
         print(filepath)
         archive = ZipFile(filepath[:-6] + "zip", "w")
-        cv2.imwrite("image.png", img=opencv_current_image)
-        text = open("text.txt", "a+")
-        text.write("Hello World")
-        text.close()
-        archive.write("text.txt")
+        cv2.imwrite("image.png", img=opencv_base_image)
+        annFile = open("annotations.p", "wb")
+        pickle.dump(ann, annFile)
+        annFile.close()
+        archive.write("annotations.p")
         archive.write("image.png")
         archive.close()
-        os.remove("text.txt")
+        os.remove("annotations.p")
         os.remove("image.png")
         os.rename(filepath[:-6] + "zip", filepath)
         print_log("Export Successful")
@@ -88,9 +113,14 @@ def FileMenuHandler(choice):
         if (filepath != ""):
             image = cv2.imread(filepath)
             final_image = image
+            opencv_base_image = image
+            opencv_base_image = cv2.resize(opencv_base_image, (960, 540), interpolation=cv2.INTER_LINEAR)
             final_image = cv2.resize(final_image, (960, 540), interpolation=cv2.INTER_LINEAR)
             image = cv2.resize(image, (960, 540), interpolation=cv2.INTER_LINEAR)
+            ann = []
             xyxys, cls = detect(image)
+            ann.append(xyxys)
+            ann.append(cls)
             print_log("Detection Results:")
             results = dict()
             for i in range(len(xyxys)):
@@ -116,7 +146,9 @@ def FileMenuHandler(choice):
             label.configure(image=imagetk)
             label.image = imagetk
             opencv_current_image = final_image
+            cv2.imwrite('/home/grizimin/Desktop/base_image.png', opencv_base_image)
             print_log("Detection Complete")
+            print(ann)
 
     if (choice == "Выйти"):
         exit(-1)
