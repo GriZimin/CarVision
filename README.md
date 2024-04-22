@@ -1,9 +1,28 @@
 # Описание
 CarVision является проектом по теме "Комьютерное зрение в беспилотном транспорте" учащихся 8И класса.
 
-Для установки, введите следующюю команду
+## Установка
+Копирование проекта
+
+```git clone https://github.com/GriZimin/CarVision.git```
+
+Создание venv
+
+```
+python -m venv .venv
+```
+
+Вход в venv
+Windows:
+```/.venv/Scripts/activate.bat```
+Linux:
+```source .venv/bin/activate```
+
+Установка зависимостей
 
 ```pip install -r requirements.txt ```
+или 
+```pip install ultralytics pillow keyboard roboflow customtkinter opencv-python zipfile pickle```
 
 Проект выполнен с использованием языка Python и фреймворков Tkinter, OpenCV и YOLO.
 ___
