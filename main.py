@@ -50,7 +50,7 @@ def print_log(text):
 ann = []
 names = ['barricade', 'crossing', 'person']
 colors = [(0,0,255), (0,255,0), (255,255,0)]
-opencv_current_image = cv2.imread("model/runs/detect/predict6/valpic.jpg")
+opencv_current_image = cv2.imread("image/black.jpg")
 opencv_base_image = opencv_current_image
 def FileMenuHandler(choice):
     global opencv_current_image
