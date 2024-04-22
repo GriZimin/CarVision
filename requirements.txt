@@ -1,0 +1,9 @@
+attrs==23.2.0
+cffi==1.16.0
+cryptography==42.0.5
+packaging==23.2
+pulsemixer==1.5.1
+pycparser==2.22
+PyGObject==3.48.1
+ranger-fm==1.9.3
+smbus==1.1
