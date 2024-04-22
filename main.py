@@ -32,7 +32,7 @@ window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="images/favicon.png
 image_frame = ctk.CTkFrame(master=window)
 image_frame.grid(row=1, pady=10, padx=10)
 
-image = Image.open('model/runs/detect/predict6/valpic.jpg').resize((711, 430))
+image = Image.open('images/black.jpg').resize((711, 430))
 image_tk = ImageTk.PhotoImage(image)
 label = ttk.Label(image_frame, image=image_tk)
 label.grid(row=2, column=0, padx=10, pady=10, sticky="nsw")

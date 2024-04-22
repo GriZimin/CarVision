@@ -30,7 +30,7 @@ model.train(data="config.yaml", epochs=1)"""
 names = ['barricade', 'crossing', 'person']
 colors = [(0,0,255), (0,255,0), (255,255,0)]
 def detect(image):
-    model = YOLO('model/runs/detect/train12/weights/best.pt')
+    model = YOLO('model/best.pt')
     results = model.predict(image)
     # for result in results:
     #     boxes = result.boxes.cpu().numpy()
