@@ -20,7 +20,7 @@ def openGitHub():
     webbrowser.open("https://github.com/GriZimin/ComputerVision")
 
 def openDocumentation():
-    webbrowser.open("grizimin.github.io/ComputerVision/")
+    webbrowser.open("grizimin.github.io/CarVision/")
 
 
 
