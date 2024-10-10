@@ -1,6 +1,5 @@
 import numpy as np
 import cv2
-import model.main
 from model.lines import detect
 
 def middle_line_picture(picture):
