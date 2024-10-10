@@ -1,7 +1,6 @@
 import tkinter as tk
 from model.lines.lines1 import middle_line_picture
 from model.main import detect
-import model.main
 import view.view_defs as defs
 from tkinter import messagebox
 from tkinter import ttk
@@ -32,7 +31,7 @@ window.tk.call('wm', 'iconphoto', window, tk.PhotoImage(file="images/favicon.png
 image_frame = ctk.CTkFrame(master=window)
 image_frame.grid(row=1, pady=10, padx=10)
 
-image = Image.open('images\\minimalizm-shesterni-sistema.jpg').resize((711, 430))
+image = Image.open('images//minimalizm-shesterni-sistema.jpg').resize((711, 430))
 image_tk = ImageTk.PhotoImage(image)
 label = ttk.Label(image_frame, image=image_tk)
 label.grid(row=2, column=0, padx=10, pady=10, sticky="nsw")
