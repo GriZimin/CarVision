@@ -32,11 +32,10 @@ ___
 + Зимин Григорий ([GriZimin](https://github.com/GriZimin))
 + Галкин Егор ([Evoluthion2](https://github.com/Evoluthion2))
 + Боронина Полина ([Radost29](https://github.com/Radost29))
-+ Шибакова Ольга ([oshi1b](https://github.com/oshi1b))
 + Энс Федор
 + Молоканова Лера 
-+ Саитова Алана
 + Филимонова Арина
++ Войцехович Виталий
 
 ### ***Проект в разработке!***
 
